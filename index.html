@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>this、for in、json、class</title>
+</head>
+<body>
+	<script>
+		// object对象   this
+	    function Student(name,age,sex){
+	        this.name = name;   //属性名   参数
+	        this.age = age;
+	        this.sex = sex;
+	        this.say = function(){
+	            alert(2);
+	        }
+	    }
+	    let zsan = new Student('张三',20,'男');
+	    let lisi = new Student('李四',22,'女');
+
+	    console.log(zsan);
+	    console.log(lisi);
+
+
+
+	    function Oppo(name,color,price){
+	        this.name = name;
+	        this.color = color;
+	        this.price = price;
+	        this.gn = function(){
+	            alert('拍照功能好');
+	        }
+	    }
+	    let phone = new Oppo('手机','black',1499);
+	    // alert(phone.gn());   //先执行方法，弹出alert,然后在弹出函数的返回值undefined
+	    phone.gn();
+	    console.log(phone);
+	    // alert(phone.system);  //没有这个属性，默认undefined
+	    // phone.tv();  //没有这个方法，会报错
+	    // alert(phone.name);
+	    // alert(phone['name']);
+	    // phone["gn"]();
+	    
+	    // 遍历  for in    用[]
+	    for(let i in phone){   //i是属性名
+	        console.log(`${i}---${phone[i]}`);
+	    }
+
+
+	    // json
+	    let zhangsan = {
+	        "age":18,
+	        "sex":'nan',
+	        "name":'zhangsan',
+	        say : function(){
+	            alert(1);
+	        }
+	    };    
+	    //json对象
+	    // let zhangsan = new Object();
+	    // zhangsan.age = 18;
+	    // zhangsan.name = 'zhangsan';
+	    // zhangsan.sex = 'nan';
+	    // alert(zhangsan.constructor);   //返回它的构造函数
+	    console.log(zhangsan);
+	    
+
+	    //class
+	    class Student1{
+	        constructor(){    //构造函数    方法(){}
+	            this.name = 'zs';
+	            this.age = 20;
+	            // this.say = function(){
+	            //     alert(1);
+	            // }
+	        };
+	        study(){          //es6新语法   写到constructor外面，方法名(){}
+	            alert('学习');
+	        };             //分号可加可不加
+	        play(){
+	            alert('玩');
+	        };
+	    }
+	    let zs = new Student1();
+	    // zs.say();
+	    zs.study();
+	    console.log(zs);
+
+
+	    class parent{
+	        constructor(name,age){
+	            this.name = name;
+	            this.age = age;
+	        };
+	        work(value){
+	            alert(value);
+	        };
+	    }
+	    let mrli = new parent('li',20);
+	    mrli.work('上班');
+	    console.log(mrli);
+
+	    //prototype 原型对象
+	    function Person(name,age,sex){   //构造函数传参
+	        this[1] = 'a';     //属性也可以是数字
+	        this.name = name;
+	        this.age = age;
+	        this.sex = sex;
+	        this.brain = `${this.name}头脑`;
+	        this.say = function(value){    //给方法传参，直接写方法的后面，方法可以调用属性
+	            alert(value);
+	        }
+	        this.study = function(){
+	            alert(this.brain);
+	        }
+	        this.speech = function(value){
+	            this.say(value);
+	        }
+	    }
+	    let wangwu = new Person('王五',20,'男');
+	    wangwu.say('对象的方法传参');
+	    wangwu.study();
+	    wangwu.speech('演讲');
+	    console.log(wangwu);
+    
+
+	    // myArray      
+	       function myArray(){
+	            for(let i=0;i<arguments.length;i++){
+	                this[i] = arguments[i];
+	            }
+	            this.length = arguments.length;          
+	       }
+	       let arr = new myArray('a','s','d','f',1,8,9,4,5);
+	       console.log(arr);
+	</script>
+</body>
+</html>
